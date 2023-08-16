@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+    <title>Account Info</title>
+</head>
+
+<body>
+    {% include "_navbar.html" %}
+    <div class="bodyImg">
+        <div class="text-center">
+            {% for message in get_flashed_messages(category_filter=['registration']) %}
+            <p class="text-danger">{{message}}</p>
+            {% endfor %}
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="w-25 mt-3 ">
+                <form action="/users/update/{{logged_user.id}}" method="POST">
+                    <div>
+                        <label for="first_name" class="form-label">First Name:</label>
+                        <input type="text" name="first_name" class="form-control" id="first_name"
+                            value="{{logged_user.first_name}}" />
+                    </div>
+                    <div>
+                        <label for="last_name" class="form-label">Last Name:</label>
+                        <input type="text" name="last_name" class="form-control" id="last_name"
+                            value="{{logged_user.last_name}}" />
+                    </div>
+                    <div>
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="text" name="email" class="form-control" id="email" value="{{logged_user.email}}" />
+                    </div>
+                    <div>
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" name="password" class="form-control" id="password" />
+                    </div>
+                    <div>
+                        <label for="confirm_password" class="form-label">Confirm Password:</label>
+                        <input type="password" name="confirm_password" class="form-control" id="confirm_password" />
+                    </div>
+                    <input type="submit" value="Submit" class="mt-3 mb-3 btn btn-light btn-sm" />
+                    <a class="btn btn-warning btn-sm" href="/dashboard">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
